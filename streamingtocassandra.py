@@ -6,7 +6,7 @@ def main():
     # Create a SparkSession
     spark = SparkSession.builder \
         .appName("TopCandidatesKafkaToCassandra") \
-        .config("spark.cassandra.connection.host", "cassandra_host") \
+        .config("spark.cassandra.connection.host", "127.0.0.1") \
         .getOrCreate()
 
     # Define the schema based on your CSV structure
@@ -15,8 +15,8 @@ def main():
     # Read from Kafka
     df = spark.readStream \
         .format("kafka") \
-        .option("kafka.bootstrap.servers", "kafka_server:9092") \
-        .option("subscribe", "topic_name") \
+        .option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667") \
+        .option("subscribe", "zerotohero") \
         .option("startingOffsets", "earliest") \
         .load()
 
@@ -39,8 +39,8 @@ def main():
     query = top_candidates.writeStream \
         .outputMode("complete") \
         .format("org.apache.spark.sql.cassandra") \
-        .option("keyspace", "your_keyspace") \
-        .option("table", "your_table") \
+        .option("keyspace", "electiondata") \
+        .option("table", "candidate") \
         .start()
 
     query.awaitTermination()
