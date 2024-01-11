@@ -40,7 +40,7 @@ def main():
         .outputMode("complete") \
         .format("org.apache.spark.sql.cassandra") \
         .option("keyspace", "electiondata") \
-        .option("table", "candidate") \
+        .option("table", "election") \
         .start()
 
     query.awaitTermination()
