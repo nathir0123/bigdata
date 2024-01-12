@@ -1,0 +1,11 @@
+state,county,candidate,party,total_votes,won
+Delaware,Kent County,Joe Biden,DEM,44552,True
+Delaware,Kent County,Donald Trump,REP,41009,False
+Delaware,Kent County,Jo Jorgensen,LIB,1044,False
+Delaware,Kent County,Howie Hawkins,GRN,420,False
+Delaware,New Castle County,Joe Biden,DEM,195034,True
+Delaware,New Castle County,Donald Trump,REP,88364,False
+Delaware,New Castle County,Jo Jorgensen,LIB,2953,False
+Delaware,New Castle County,Howie Hawkins,GRN,1282,False
+Delaware,Sussex County,Donald Trump,REP,71230,True
+Delaware,Sussex County,Joe Biden,DEM,56682,False
