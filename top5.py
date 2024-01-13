@@ -16,7 +16,7 @@ def saveToCassandra(df):
     df.write \
       .format("org.apache.spark.sql.cassandra") \
       .mode('append') \
-      .options(table="electionss", keyspace="electiondata") \
+      .options(table="electionn", keyspace="electiondata") \
       .save()
 
 def main():
@@ -25,14 +25,14 @@ def main():
     spark = SparkSession.builder.appName("HDFSToCassandra").getOrCreate()
 
     # Read data from HDFS
-    data_rdd = sc.textFile("hdfs:///user/maria_dev/cassandra/president_county_candidate.csv")
+    data_rdd = sc.textFile("hdfs:///user/maria_dev/flumev1/*")
     parsed_rdd = data_rdd.map(parse_line).filter(lambda x: x is not None)
     df = spark.createDataFrame(parsed_rdd)
 
     # Calculate top 5 candidates by total votes
     top_candidates = df.groupBy("candidate") \
-                       .agg(_sum("total_votes").alias("total_votes")) \
-                       .orderBy(desc("total_votes")) \
+                       .agg(_sum("total_votes").alias("all_votes")) \
+                       .orderBy(desc("all_votes")) \
                        .limit(5)
 
     # Show the results in the console
